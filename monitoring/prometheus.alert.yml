@@ -1,0 +1,10 @@
+groups:
+  - name: example_alert
+    rules:
+      - alert: service_is_up
+        expr: up > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: Your service is up and running! Stop it before it runs too far!
