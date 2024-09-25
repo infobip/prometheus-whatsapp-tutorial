@@ -7,41 +7,32 @@
 (Tutorial is available at <INSERT_LINK>)
 
 This project illustrates how to integrate Prometheus with Infobip's WhatsApp API in order to receive alerts on a mobile
-phone. 
+phone. The project has three parts: Prometheus, Alertmanager and a simple Spring boot application that connects the 
+Prometheus alert with the Infobip's WhatsApp API. Here is a high level overview:
 
+![Monitoring Setup](monitoring_setup.png)
 
 ## Setup
 
-You will need an account on Infobip and a WhatsApp API key with the scope `whatsapp:message:send`, before running the 
-application make sure to replace the placeholders in `application.properties` file with your:
+Project requires an account on Infobip and a WhatsApp API key with the scope `whatsapp:message:send`, before running the 
+application the placeholders in `application.properties` need to be replaced with:
 
 - Infobip API key
 - personal Infobip base url
 - sender phone number
 - recipient phone number
 
-(all of the values except recipient phone number can be found in your Infobip account)
-
-To run the local monitoring setup, run the following command from project root directory:
+Project can be started by running the following command
 
 ```shell
 docker compose up -d
 ```
 
-This will start a Prometheus and Alertmanager instance on your local machine. You can access the Prometheus dashboard
-at `localhost:9090` and the Alertmanager dashboard at `localhost:9093`. 
+After project starts up the Prometheus will be available at `http://localhost:9090` and Alertmanager at `http://localhost:9093`.
+The Prometheus and Alermanager consoles can be used to inspect the status of the Alerts, the same alert should land on the recipient
+phone number.
 
-To run the application, execute the following command from the project root directory:
-
-```shell
-mvn spring-boot:run
-```
-
-This will create a following setup, which will send a message to your phone number after the application starts:
-
-![Monitoring Setup](monitoring_setup.png)
-
-To shut down the monitoring setup, run the following command from the project root directory:
+To shut down the example, the following command need to be executed from the project root directory:
 
 ```shell
 docker compose down
