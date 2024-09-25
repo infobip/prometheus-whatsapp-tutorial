@@ -2,7 +2,7 @@
 FROM maven:3.9-eclipse-temurin-21-jammy as build-stage
 WORKDIR /opt/infobip-prometheus-alerting
 COPY pom.xml .
-RUN mvn dependency:go-offline -U
+RUN mvn dependency:go-offline
 COPY ./src ./src
 RUN mvn clean package -Dmaven.test.skip=true
 
