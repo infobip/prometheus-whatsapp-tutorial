@@ -25,7 +25,7 @@ application the placeholders in `application.properties` need to be replaced wit
 Project can be started by running the following command
 
 ```shell
-docker compose up -d
+docker compose up --build -d
 ```
 
 After project starts up the Prometheus will be available at `http://localhost:9090` and Alertmanager at `http://localhost:9093`.

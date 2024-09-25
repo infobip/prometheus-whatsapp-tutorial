@@ -8,6 +8,8 @@ services:
       - ./monitoring/prometheus.alert.yml:/etc/prometheus/prometheus.alert.yml
     ports:
       - "9090:9090"
+    networks:
+        - monitoring-example
 
   alertmanager:
     image: prom/alertmanager:latest
@@ -15,6 +17,9 @@ services:
       - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml
     ports:
       - "9093:9093"
+    networks:
+      - monitoring-example
+
   infobip-prometheus-alerting:
     build:
       context: ./infobip-prometheus-alerting
@@ -26,3 +31,9 @@ services:
         condition: service_started
     ports:
         - "8080:8080"
+    networks:
+      - monitoring-example
+
+networks:
+    monitoring-example:
+        driver: bridge

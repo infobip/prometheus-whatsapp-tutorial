@@ -8,4 +8,4 @@ route:
 receivers:
   - name: 'web.hook'
     webhook_configs:
-      - url: 'http://localhost:8080/send-alert'
+      - url: 'http://infobip-prometheus-alerting:8080/send-alert'
