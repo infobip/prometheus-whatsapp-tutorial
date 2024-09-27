@@ -41,7 +41,7 @@ class InfobipWhatsAppClient {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             log.info("Response: {}", response.body());
         } catch (IOException | InterruptedException e) {
-            throw new InfobipWhatsAppClientException("Failed to send Whats App message to Infobip API", e);
+            log.error("Failed to send message", e);
         }
     }
 
