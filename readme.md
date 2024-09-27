@@ -23,7 +23,7 @@ Prometheus alert with the Infobip's WhatsApp API. Below is a high level overview
 ### Setup
 
 Project can be run using `Docker`, it requires an account on Infobip and a WhatsApp API key with the scope `whatsapp:message:send`,
-before running `docker compose` command, the placeholders in `application.properties` need to be replaced with:
+before running `docker compose` command, the placeholders in `.env` need to be replaced with:
 
 - Infobip API key
 - Personal Infobip base url

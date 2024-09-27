@@ -24,6 +24,12 @@ services:
     build:
       context: ./infobip-prometheus-alerting
       dockerfile: Dockerfile
+    environment:
+      INFOBIP_BASE_URL: ${INFOBIP_BASE_URL}
+      INFOBIP_API_KEY: ${INFOBIP_API_KEY}
+      SENDER_NUMBER: ${SENDER_NUMBER}
+      RECEIVER_NUMBER: ${RECEIVER_NUMBER}
+
     depends_on:
       prometheus:
         condition: service_started

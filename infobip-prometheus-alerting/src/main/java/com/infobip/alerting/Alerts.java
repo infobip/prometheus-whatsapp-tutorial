@@ -7,7 +7,7 @@ record Alerts(List<Alert> alerts) {
 
     record Alert(String status, Map<String, Object> labels, Map<String, Object> annotations) {
 
-        String asText() {
+        String text() {
             var severity = (String) labels.get("severity");
             var instance = (String) labels.get("instance");
             var summary = (String) annotations.get("summary");

@@ -11,9 +11,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @Service
-class InfobipWhatsAppService {
+class InfobipWhatsAppClient {
 
-    private final Logger log = LoggerFactory.getLogger(InfobipWhatsAppService.class);
+    private final Logger log = LoggerFactory.getLogger(InfobipWhatsAppClient.class);
     private final HttpClient client = HttpClient.newHttpClient();
 
     private final String baseUrl;
@@ -21,14 +21,14 @@ class InfobipWhatsAppService {
     private final String sender;
     private final String receiver;
 
-    InfobipWhatsAppService(InfobipProperties properties) {
+    InfobipWhatsAppClient(InfobipProperties properties) {
         this.baseUrl = properties.getBaseUrl();
         this.apiKey = properties.getApiKey();
         this.sender = properties.getSender();
         this.receiver = properties.getReceiver();
     }
 
-    void sendWhatsAppMessage(String message) {
+    void sendMessage(String message) {
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl))
                 .header("Authorization", apiKey)
@@ -41,7 +41,7 @@ class InfobipWhatsAppService {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             log.info("Response: {}", response.body());
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new InfobipWhatsAppClientException("Failed to send Whats App message to Infobip API", e);
         }
     }
 
