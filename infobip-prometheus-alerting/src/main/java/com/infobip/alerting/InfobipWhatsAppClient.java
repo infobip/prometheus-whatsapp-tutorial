@@ -1,5 +1,6 @@
 package com.infobip.alerting;
 
+import com.infobip.alerting.webpage.InfobipApiResponseEventsController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import java.net.http.HttpResponse;
 @Service
 class InfobipWhatsAppClient {
 
+    private final InfobipApiResponseEventsController controller;
+
     private final Logger log = LoggerFactory.getLogger(InfobipWhatsAppClient.class);
     private final HttpClient client = HttpClient.newHttpClient();
 
@@ -21,7 +24,8 @@ class InfobipWhatsAppClient {
     private final String sender;
     private final String receiver;
 
-    InfobipWhatsAppClient(InfobipProperties properties) {
+    InfobipWhatsAppClient(InfobipApiResponseEventsController controller, InfobipProperties properties) {
+        this.controller = controller;
         this.baseUrl = properties.getBaseUrl();
         this.apiKey = properties.getApiKey();
         this.sender = properties.getSender();
@@ -40,6 +44,7 @@ class InfobipWhatsAppClient {
         try {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             log.info("Response: {}", response.body());
+            controller.registerEvent(response.body());
         } catch (IOException | InterruptedException e) {
             log.error("Failed to send message", e);
         }

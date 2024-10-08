@@ -4,7 +4,7 @@ WORKDIR /opt/infobip-prometheus-alerting
 COPY pom.xml .
 RUN mvn dependency:go-offline
 COPY ./src ./src
-RUN mvn clean package -Dmaven.test.skip=true
+RUN mvn clean package -U -Dmaven.test.skip=true
 
 # Stage 2, creates a JRE based image with compiled app
 FROM eclipse-temurin:21-jammy
