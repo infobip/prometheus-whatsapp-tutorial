@@ -12,7 +12,7 @@ public class InfobipApiResponseEventsController {
     private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
     @GetMapping("/ib-sse")
-    public SseEmitter registerServerSideEventReceiver() {
+    public SseEmitter registerServerSentEventReceiver() {
         SseEmitter emitter = new SseEmitter(0L);
         emitters.add(emitter);
         emitter.onCompletion(() -> emitters.remove(emitter));

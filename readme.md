@@ -38,7 +38,7 @@ docker compose up --build -d
 
 After project starts up, Prometheus will be available at `http://localhost:9090` and Alertmanager at `http://localhost:9093`.
 The Prometheus and Alermanager consoles can be used to inspect the status of the Alerts, the same alert should land on the recipient
-phone number ~30 seconds after the alert has fired on Prometheus. The page `localhost:8080/index.html` will automatically render the response from Infobip API.
+phone number ~30 seconds after the alert has fired on Prometheus. The page `http://localhost:8080/index.html` will automatically render the response from Infobip API.
 
 To shut down the example, the following command need to be executed from the project root directory:
 
