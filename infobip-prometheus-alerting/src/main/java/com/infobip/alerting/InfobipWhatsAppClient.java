@@ -44,7 +44,7 @@ class InfobipWhatsAppClient {
         try {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             log.info("Response: {}", response.body());
-            controller.registerEvent(response.body());
+            controller.notify(response.body());
         } catch (IOException | InterruptedException e) {
             log.error("Failed to send message", e);
         }

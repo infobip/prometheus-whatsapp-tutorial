@@ -1,7 +1,5 @@
 package com.infobip.alerting.webpage;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -13,8 +11,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class InfobipApiResponseEventsController {
     private final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
-    @GetMapping("/ib-sse-events")
-    public SseEmitter emitInfobipApiResponsEvents() {
+    @GetMapping("/ib-sse")
+    public SseEmitter registerServerSideEventReceiver() {
         SseEmitter emitter = new SseEmitter(0L);
         emitters.add(emitter);
         emitter.onCompletion(() -> emitters.remove(emitter));
@@ -22,10 +20,10 @@ public class InfobipApiResponseEventsController {
         return emitter;
     }
 
-    public void registerEvent(String data) {
+    public void notify(String eventData) {
         for (SseEmitter emitter : emitters) {
             try {
-                emitter.send(data);
+                emitter.send(eventData);
             } catch (Exception e) {
                 emitters.remove(emitter);
             }

@@ -8,7 +8,7 @@
 <h1>Responses from Infobip WhatsApp API</h1>
 <pre id="json-container"></pre>
 <script>
-    const eventSource = new EventSource('ib-sse-events');
+    const eventSource = new EventSource('ib-sse');
     eventSource.onmessage = function(event) {
         const prettifiedJson = JSON.stringify(JSON.parse(event.data), null, 2);
         const newElement = document.createElement('pre');
